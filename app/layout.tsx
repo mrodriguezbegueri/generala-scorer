@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Providers from "./providers";
 import { Box } from "@mui/material";
+import { GameProvider } from "@/context";
 
 const roboto = Roboto({
   weight: "700",
@@ -17,15 +18,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={roboto.className}>
-        <Providers>
-          <main>
-            <Box sx={{ flexFlow: 1 }}>
-              <Box sx={{ padding: "10px 20px" }}>{children}</Box>
-            </Box>
-          </main>
-        </Providers>
-      </body>
+      <GameProvider>
+        <body className={roboto.className}>
+          <Providers>
+            <main>
+              <Box sx={{ flexFlow: 1 }}>
+                <Box sx={{ padding: "10px 20px" }}>{children}</Box>
+              </Box>
+            </main>
+          </Providers>
+        </body>
+      </GameProvider>
     </html>
   );
 }

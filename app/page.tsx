@@ -1,21 +1,19 @@
-"use client";
+"use client"
 
-import { Box, Grid, Paper, styled } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import { Item } from "@/components";
+import PlayerColumn from "@/components/PlayerColumn";
+import { useContext } from "react";
+import { GameContext } from "@/context";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export default function Home() {
+  const { players } = useContext(GameContext)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-
-      <Grid container spacing={2} xs={12}>
-        <Grid rowSpacing={2} container item xs={6}>
+      <Grid container spacing={2} >
+        <Grid rowSpacing={2} container item xs={2}>
           <Grid item xs={12}>
             <Item>1</Item>
           </Grid>
@@ -51,41 +49,11 @@ export default function Home() {
           </Grid>
         </Grid>
 
-        <Grid rowSpacing={2} container item xs={6}>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-          <Grid item xs={12}>
-            <Item>Input</Item>
-          </Grid>
-        </Grid>
+        {
+          players.map((item) => (
+            <PlayerColumn players={players} key={item} />
+          ))
+        }
       </Grid>
     </Box>
   );
