@@ -1,33 +1,48 @@
-"use client"
+"use client";
 
-import { FC, PropsWithChildren, useReducer } from 'react'
-import { GameContext, gameReducer } from '.'
+import { FC, PropsWithChildren, useReducer } from "react";
+import { GameContext, gameReducer } from ".";
+import { Player } from "@/interfaces";
 
 export interface GameState {
-   players: number[]
+  players: Player[];
 }
 
 const Game_INITIAL_STATE: GameState = {
-   players: [...Array(2)].map((index) => index + 1)
-}
+  players: [
+    {
+      name: "Matufa",
+      totalScore: 0,
+    },
+    {
+      name: "Mamuchi",
+      totalScore: 0,
+    },
+  ],
+};
 
+const GameProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [state, dispatch] = useReducer(gameReducer, Game_INITIAL_STATE);
 
-const GameProvider:FC<PropsWithChildren> = ({ children }) => {
+  const setPlayers = () => {
+    dispatch({ type: "[Game]- Set Players", payload: Game_INITIAL_STATE.players });
+  };
 
-   const [state, dispatch] = useReducer(gameReducer, Game_INITIAL_STATE)
-
-   const setPlayers = () => {
-    dispatch({type: '[Game]- Set Players', payload: Game_INITIAL_STATE.players})
-   }
+  const updateTotalScore = (player: Player) => {
+    dispatch({ type: "[Game]- Update TotalScore", payload: player});
+  };
 
   return (
-    <GameContext.Provider value={{
-       ...state,
-       setPlayers
-    }}>
-       { children }
-   </GameContext.Provider>
-  )
-}
+    <GameContext.Provider
+      value={{
+        ...state,
+        setPlayers,
+        updateTotalScore
+      }}
+    >
+      {children}
+    </GameContext.Provider>
+  );
+};
 
-export default GameProvider
+export default GameProvider;

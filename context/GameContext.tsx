@@ -1,11 +1,13 @@
 "use client"
 
+import { Player } from '@/interfaces'
 import { createContext } from 'react'
 
 export interface ContextProps {
-    players: number[]
+    players: Player[]
 
     setPlayers: () => void
+    updateTotalScore: (player: Player) => void
 }
 
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Item } from "@/components";
 import PlayerColumn from "@/components/PlayerColumn";
 import { useContext } from "react";
@@ -11,9 +11,12 @@ export default function Home() {
   const { players } = useContext(GameContext)
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <div style={{ display: 'flex' }}>
       <Grid container spacing={2} >
         <Grid rowSpacing={2} container item xs={2}>
+          <Grid item xs={12}>
+            <Item>Jugadores</Item>
+          </Grid>
           <Grid item xs={12}>
             <Item>1</Item>
           </Grid>
@@ -47,14 +50,17 @@ export default function Home() {
           <Grid item xs={12}>
             <Item>Doble</Item>
           </Grid>
+          <Grid item xs={12}>
+            <Item>Total</Item>
+          </Grid>
         </Grid>
 
         {
-          players.map((item) => (
-            <PlayerColumn players={players} key={item} />
+          players.map((player) => (
+            <PlayerColumn player={player} countPlayers={players.length} key={player.name} />
           ))
         }
       </Grid>
-    </Box>
+    </div>
   );
 }

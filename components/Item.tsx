@@ -1,13 +1,17 @@
-"use client"
+"use client";
 
 import { Paper, styled } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  
-export default Item
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  justifyContent:"center",
+  color: theme.palette.text.secondary,
+  height: "100px",
+}));
+
+export default Item;
