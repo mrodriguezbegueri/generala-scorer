@@ -17,7 +17,7 @@ export const gameReducer = (state: GameState, action: GameActionType): GameState
         ...state,
         players: state.players.map ( player => {
           if (player.name === action.payload.player.name) {
-            player.totalScore += action.payload.score
+            player.totalScore = action.payload.score
           }
           return player
         })

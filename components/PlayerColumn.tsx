@@ -16,12 +16,21 @@ const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
   const [selectedValues, setSelectedValues] = useState(Array(Object.keys(GAME_VALUES).length).fill(""));
 
   const { updateTotalScore } = useContext(GameContext);
+  
   const handleChange = (event: SelectChangeEvent, index: number) => {
     const newSelectedValues = [...selectedValues];
     newSelectedValues[index] = event.target.value;
+    console.log('newSelectedValues', newSelectedValues)
     setSelectedValues(newSelectedValues);
 
-    updateTotalScore(player, Number(event.target.value))
+    const totalScore = newSelectedValues.reduce((accumulator, currentValue) => {
+      if (currentValue !== "") {
+        return accumulator + currentValue
+      }
+      return accumulator
+    }, 0);
+    
+    updateTotalScore(player, totalScore)
   };
 
   return (
