@@ -2,7 +2,7 @@
 
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { Item } from ".";
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { GAME_VALUES } from "@/constants";
 import { Player } from "@/interfaces";
 import { GameContext } from "@/context";
@@ -13,7 +13,13 @@ interface Props {
 }
 
 const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
-  const [selectedValues, setSelectedValues] = useState(Array(Object.keys(GAME_VALUES).length).fill(""));
+  const [selectedValues, setSelectedValues] = useState(player.values);
+  const [currentPlayer, setCurrentPlayer] = useState(player)
+
+  useEffect(() => {
+    setCurrentPlayer(player);
+    setSelectedValues(player.values)
+  }, [player]);
 
   const { updateTotalScore } = useContext(GameContext);
   
@@ -25,23 +31,18 @@ const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
 
     const totalScore = newSelectedValues.reduce((accumulator, currentValue) => {
       if (currentValue !== "") {
-        return accumulator + currentValue
+        return accumulator + Number(currentValue)
       }
       return accumulator
     }, 0);
     
+    player.values = newSelectedValues
+    setCurrentPlayer(player)
     updateTotalScore(player, totalScore)
   };
 
   return (
-    <Grid rowSpacing={2} container item xs={Math.floor(10 / countPlayers)}>
-      <Grid item xs={12}>
-        <Item>
-          <Box>
-            <Typography> {player.name} </Typography>
-          </Box>
-        </Item>
-      </Grid>
+    <Grid rowSpacing={2} container item xs={10}>
       {Object.keys(GAME_VALUES).map((gameValue, index) => (
         <Grid item xs={12} key={GAME_VALUES[gameValue].label}>
           <Item>
@@ -64,7 +65,7 @@ const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
       <Grid item xs={12}>
         <Item>
           <Box>
-            <Typography> {player.totalScore.toString()} </Typography>
+            <Typography> {currentPlayer.totalScore.toString()} </Typography>
           </Box>
         </Item>
       </Grid>

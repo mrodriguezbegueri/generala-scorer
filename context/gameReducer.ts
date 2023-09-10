@@ -3,7 +3,8 @@ import { GameState } from ".";
 
 type GameActionType =
   | { type: "[Game]- Set Players"; payload: Player[] }
-  | { type: "[Game]- Update TotalScore"; payload: { player: Player, score: number } };
+  | { type: "[Game]- Update TotalScore"; payload: { player: Player, score: number } }
+  | { type: "[Game]- Set CurrentPlayer"; payload: Player }
 
 export const gameReducer = (state: GameState, action: GameActionType): GameState => {
   switch (action.type) {
@@ -22,7 +23,12 @@ export const gameReducer = (state: GameState, action: GameActionType): GameState
           return player
         })
       };
-
+      case "[Game]- Set CurrentPlayer":
+      return {
+        ...state,
+        currentPlayer: action.payload
+      };
+      
     default:
       return state;
   }

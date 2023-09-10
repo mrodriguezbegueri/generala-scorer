@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Providers from "./providers";
-import { Box } from "@mui/material";
+import { Box, styled } from '@mui/material';
 import { GameProvider } from "@/context";
+import { Players } from "@/components/ui";
 
 const roboto = Roboto({
   weight: "700",
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Providers>
             <main>
               <Box sx={{ flexFlow: 1 }}>
-                <Box sx={{ padding: "10px 20px" }}>{children}</Box>
+                <Box sx={{ padding: "10px 20px" }}>
+                <Players/>
+                  {children}
+                  </Box>
               </Box>
             </main>
           </Providers>

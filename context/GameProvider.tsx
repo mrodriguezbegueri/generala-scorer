@@ -3,20 +3,29 @@
 import { FC, PropsWithChildren, useReducer } from "react";
 import { GameContext, gameReducer } from ".";
 import { Player } from "@/interfaces";
+import { GAME_VALUES } from "@/constants";
 
 export interface GameState {
   players: Player[];
+  currentPlayer: Player
 }
 
 const Game_INITIAL_STATE: GameState = {
+  currentPlayer: {
+    name: "Matufa",
+    values: Array(Object.keys(GAME_VALUES).length).fill(""),
+    totalScore: 0
+  },
   players: [
     {
       name: "Matufa",
-      totalScore: 0,
+      values: Array(Object.keys(GAME_VALUES).length).fill(""),
+      totalScore: 0
     },
     {
       name: "Mamuchi",
-      totalScore: 0,
+      values: Array(Object.keys(GAME_VALUES).length).fill(""),
+      totalScore: 0
     },
   ],
 };
@@ -32,11 +41,16 @@ const GameProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch({ type: "[Game]- Update TotalScore", payload: {player, score}});
   };
 
+  const setCurrentPlayer = (player: Player) => {
+    dispatch({ type: "[Game]- Set CurrentPlayer", payload: player });
+  };
+
   return (
     <GameContext.Provider
       value={{
         ...state,
         setPlayers,
+        setCurrentPlayer,
         updateTotalScore
       }}
     >

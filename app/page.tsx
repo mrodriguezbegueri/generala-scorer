@@ -1,24 +1,18 @@
 "use client";
 
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Item } from "@/components";
 import PlayerColumn from "@/components/PlayerColumn";
 import { useContext } from "react";
 import { GameContext } from "@/context";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 export default function Home() {
-  const { players } = useContext(GameContext);
+  const { players, currentPlayer } = useContext(GameContext);
 
   return (
     <div style={{ display: "flex" }}>
       <Grid container spacing={2}>
         <Grid rowSpacing={2} container item xs={2}>
-          <Grid item xs={12}>
-            <Item sx={{ alignItems: 'center' }}>
-              <PeopleAltIcon />
-            </Item>
-          </Grid>
           <Grid item xs={12}>
             <Item>1</Item>
           </Grid>
@@ -57,9 +51,7 @@ export default function Home() {
           </Grid>
         </Grid>
 
-        {players.map((player) => (
-          <PlayerColumn player={player} countPlayers={players.length} key={player.name} />
-        ))}
+        <PlayerColumn player={currentPlayer} countPlayers={players.length} />
       </Grid>
     </div>
   );
