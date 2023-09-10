@@ -1,32 +1,35 @@
-"use client"
+"use client";
 
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { Item } from ".";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { GAME_VALUES } from "@/constants";
 import { Player } from "@/interfaces";
+import { GameContext } from "@/context";
 
 interface Props {
   player: Player;
-  countPlayers: number
+  countPlayers: number;
 }
 
 const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
-  const [selectedValues, setSelectedValues] = useState(Array(Object.keys(GAME_VALUES).length).fill("")); // Inicializa un array de valores seleccionados
-  
+  const [selectedValues, setSelectedValues] = useState(Array(Object.keys(GAME_VALUES).length).fill(""));
 
-
+  const { updateTotalScore } = useContext(GameContext);
   const handleChange = (event: SelectChangeEvent, index: number) => {
     const newSelectedValues = [...selectedValues];
     newSelectedValues[index] = event.target.value;
     setSelectedValues(newSelectedValues);
+
+    updateTotalScore(player, Number(event.target.value))
   };
+
   return (
     <Grid rowSpacing={2} container item xs={Math.floor(10 / countPlayers)}>
       <Grid item xs={12}>
         <Item>
           <Box>
-            <Typography> { player.name } </Typography>
+            <Typography> {player.name} </Typography>
           </Box>
         </Item>
       </Grid>
@@ -52,7 +55,7 @@ const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
       <Grid item xs={12}>
         <Item>
           <Box>
-            <Typography> { player.totalScore.toString() } </Typography>
+            <Typography> {player.totalScore.toString()} </Typography>
           </Box>
         </Item>
       </Grid>

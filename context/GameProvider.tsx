@@ -28,8 +28,8 @@ const GameProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch({ type: "[Game]- Set Players", payload: Game_INITIAL_STATE.players });
   };
 
-  const updateTotalScore = (player: Player) => {
-    dispatch({ type: "[Game]- Update TotalScore", payload: player});
+  const updateTotalScore = (player: Player, score: number) => {
+    dispatch({ type: "[Game]- Update TotalScore", payload: {player, score}});
   };
 
   return (
