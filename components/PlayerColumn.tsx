@@ -13,20 +13,18 @@ interface Props {
 }
 
 const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
-  const [selectedValues, setSelectedValues] = useState(player.values);
-  const [currentPlayer, setCurrentPlayer] = useState(player)
+  const {currentPlayer, setCurrentPlayer} = useContext(GameContext)
+  const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
 
   useEffect(() => {
-    setCurrentPlayer(player);
-    setSelectedValues(player.values)
-  }, [player]);
+    setSelectedValues(currentPlayer.values)
+  }, [currentPlayer]);
 
   const { updateTotalScore } = useContext(GameContext);
   
   const handleChange = (event: SelectChangeEvent, index: number) => {
     const newSelectedValues = [...selectedValues];
     newSelectedValues[index] = event.target.value;
-    console.log('newSelectedValues', newSelectedValues)
     setSelectedValues(newSelectedValues);
 
     const totalScore = newSelectedValues.reduce((accumulator, currentValue) => {
@@ -42,7 +40,7 @@ const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
   };
 
   return (
-    <Grid rowSpacing={2} container item xs={10}>
+    <Grid rowSpacing={2} container item xs={8}>
       {Object.keys(GAME_VALUES).map((gameValue, index) => (
         <Grid item xs={12} key={GAME_VALUES[gameValue].label}>
           <Item>

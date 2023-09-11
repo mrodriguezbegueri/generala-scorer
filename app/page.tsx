@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div style={{ display: "flex" }}>
       <Grid container spacing={2}>
-        <Grid rowSpacing={2} container item xs={2}>
+        <Grid rowSpacing={2} container item xs={4}>
           <Grid item xs={12}>
             <Item>1</Item>
           </Grid>
