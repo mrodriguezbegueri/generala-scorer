@@ -2,7 +2,7 @@
 
 import { GameContext } from "@/context";
 import { createNewPlayers } from "@/util";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -34,10 +34,14 @@ const Home = () => {
 
   const handleClose = () => {
     const players = createNewPlayers(nameValues)
-    setCurrentPlayer(players[0])
-    setPlayers(players)
-    router.push('/generala')
-    setOpen(false);
+    
+    if (players.length > 0) {
+      setCurrentPlayer(players[0])
+      setPlayers(players)
+      router.push('/generala')
+      setOpen(false);
+    }
+
   };
 
   useEffect(() => {
@@ -48,10 +52,10 @@ const Home = () => {
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} disableEscapeKeyDown>
         <DialogTitle>Jugadores</DialogTitle>
         <DialogContent>
-          <DialogContentText>Ingresa el número de jugadores</DialogContentText>
+          <DialogContentText sx={{ marginBottom: 2}}>Ingresa el número de jugadores</DialogContentText>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Jugadores</InputLabel>
             <Select
@@ -60,6 +64,7 @@ const Home = () => {
               value={cantPlayers}
               label="Players"
               onChange={handleChange}
+              sx={{ marginBottom: 2 }}
             >
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
@@ -71,15 +76,20 @@ const Home = () => {
 
             {
               arrayPlayers.map((player, index) => (
-                <TextField key={`player-${player}-index-${index}`} id="outlined-basic" label={`Jugador ${index + 1}`} variant="outlined" 
+                <Box key={`player-${player}-index-${index}`}
+                sx={{
+                  '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}>
+                {/* <Divider/> */}
+                <TextField id="outlined-basic" label={`Jugador ${index + 1}`} variant="outlined" 
                 onChange={(event) => handleTextFieldsChanges(event, index)}/>
+                </Box>
               ))
             }
 
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
           <Button onClick={handleClose}>Jugar</Button>
         </DialogActions>
       </Dialog>

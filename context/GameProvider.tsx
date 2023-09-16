@@ -11,7 +11,7 @@ export interface GameState {
 
 const Game_INITIAL_STATE: GameState = {
   currentPlayer: {
-    name: 'defult',
+    name: 'default',
     values: [],
     totalScore: 0
   },
