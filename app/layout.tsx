@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import Providers from "./providers";
 import { Box } from "@mui/material";
 import { GameProvider } from "@/context";
+import { NavBar } from "@/components/ui";
 
 const roboto = Roboto({
   weight: "700",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <GameProvider>
         <body className={roboto.className}>
           <Providers>
+            <NavBar/>
             <main>
               <Box sx={{ flexFlow: 1 }}>
                 <Box sx={{ padding: "10px 20px" }}>{children}</Box>
