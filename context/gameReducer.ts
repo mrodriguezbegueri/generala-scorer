@@ -11,7 +11,7 @@ export const gameReducer = (state: GameState, action: GameActionType): GameState
     case "[Game]- Set Players":
       return {
         ...state,
-        players: action.payload,
+        players: action.payload
       };
       case "[Game]- Update TotalScore":
       return {

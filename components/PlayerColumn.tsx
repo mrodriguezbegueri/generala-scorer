@@ -9,10 +9,9 @@ import { GameContext } from "@/context";
 
 interface Props {
   player: Player;
-  countPlayers: number;
 }
 
-const PlayerColumn: FC<Props> = ({ player, countPlayers }) => {
+const PlayerColumn: FC<Props> = ({ player }) => {
   const {currentPlayer, setCurrentPlayer} = useContext(GameContext)
   const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
 

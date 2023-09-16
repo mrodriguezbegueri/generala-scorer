@@ -7,7 +7,7 @@ export interface ContextProps {
     players: Player[]
     currentPlayer: Player
 
-    setPlayers: () => void
+    setPlayers: (players: Player[]) => void
     setCurrentPlayer: (player: Player) => void
     updateTotalScore: (player: Player, score: number) => void
 }

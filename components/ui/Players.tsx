@@ -30,7 +30,7 @@ const Players = () => {
         </Grid>
       </Grid>
       {players.map((player) => (
-        <Grid rowSpacing={2} container item xs={Math.floor(8 / players.length)} key={player.name}>
+        <Grid rowSpacing={2} container item xs={Math.max(8 / players.length)} key={player.name}>
           <Grid  item xs={12}>
               <Item className={ isCurrentPlayer(player) ? styles.currentPlayer : ''}  onClick={() => handleOnClickPlayer(player)}>
                 <Typography>{player.name}</Typography>
