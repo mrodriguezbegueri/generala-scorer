@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PlayerColumn: FC<Props> = ({ player }) => {
-  const {currentPlayer, setCurrentPlayer} = useContext(GameContext)
+  const {currentPlayer, setCurrentPlayer, setNextPlayerToCurrentPlayer} = useContext(GameContext)
   const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
 
   useEffect(() => {
@@ -36,6 +36,8 @@ const PlayerColumn: FC<Props> = ({ player }) => {
     player.values = newSelectedValues
     setCurrentPlayer(player)
     updateTotalScore(player, totalScore)
+
+    setNextPlayerToCurrentPlayer(player)
   };
 
   return (

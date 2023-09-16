@@ -89,7 +89,7 @@ const Home = () => {
 
           </FormControl>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ justifyContent: "center", margin: 1 }}>
           <Button onClick={handleClose}>Jugar</Button>
         </DialogActions>
       </Dialog>

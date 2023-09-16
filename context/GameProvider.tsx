@@ -6,16 +6,16 @@ import { Player } from "@/interfaces";
 
 export interface GameState {
   players: Player[];
-  currentPlayer: Player
+  currentPlayer: Player;
 }
 
 const Game_INITIAL_STATE: GameState = {
   currentPlayer: {
-    name: 'default',
+    name: "default",
     values: [],
-    totalScore: 0
+    totalScore: 0,
   },
-  players: []
+  players: [],
 };
 
 const GameProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -26,11 +26,21 @@ const GameProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const updateTotalScore = (player: Player, score: number) => {
-    dispatch({ type: "[Game]- Update TotalScore", payload: {player, score}});
+    dispatch({ type: "[Game]- Update TotalScore", payload: { player, score } });
   };
 
   const setCurrentPlayer = (player: Player) => {
     dispatch({ type: "[Game]- Set CurrentPlayer", payload: player });
+  };
+
+  const setNextPlayerToCurrentPlayer = (player: Player) => {
+    dispatch({
+      type: "[Game]- Set NextPlayer to CurrentPlayer",
+      payload: {
+        players: state.players,
+        player
+      },
+    });
   };
 
   return (
@@ -39,7 +49,8 @@ const GameProvider: FC<PropsWithChildren> = ({ children }) => {
         ...state,
         setPlayers,
         setCurrentPlayer,
-        updateTotalScore
+        updateTotalScore,
+        setNextPlayerToCurrentPlayer,
       }}
     >
       {children}
