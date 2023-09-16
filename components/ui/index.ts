@@ -1,3 +1,3 @@
 export { default as Players } from './Players'
 export * from './Board'
-export * from './table-score/TableScore'
+export { default as TableScore } from './table-score/TableScore'

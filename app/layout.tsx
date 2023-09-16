@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Providers from "./providers";
-import { Box } from '@mui/material';
+import { Box } from "@mui/material";
 import { GameProvider } from "@/context";
 
 const roboto = Roboto({
@@ -15,8 +15,7 @@ export const metadata: Metadata = {
   description: "Application to keep score of the Generala game",
 };
 
-export default function RootLayout({ children, players }: { children: React.ReactNode, players: React.ReactNode }) {
-  console.log('players', players)
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
       <GameProvider>
@@ -24,10 +23,7 @@ export default function RootLayout({ children, players }: { children: React.Reac
           <Providers>
             <main>
               <Box sx={{ flexFlow: 1 }}>
-                <Box sx={{ padding: "10px 20px" }}>
-                  {children}
-                  {players}
-                  </Box>
+                <Box sx={{ padding: "10px 20px" }}>{children}</Box>
               </Box>
             </main>
           </Providers>

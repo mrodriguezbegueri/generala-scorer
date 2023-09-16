@@ -11,9 +11,12 @@ export default function TableScore() {
   const { currentPlayer } = useContext(GameContext);
   const router = useRouter();
 
-  if (currentPlayer.name == "default") {
-    router.push("/");
-  }
+  useEffect(() => {
+    if (currentPlayer.name == "default") {
+      router.push("/");
+    }
+  }, [currentPlayer])
+  
 
   return (
     <>
