@@ -15,6 +15,7 @@ const PlayerColumn: FC<Props> = ({ player }) => {
   const {currentPlayer, setCurrentPlayer, setNextPlayerToCurrentPlayer} = useContext(GameContext)
   const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
 
+
   useEffect(() => {
     setSelectedValues(currentPlayer.values)
   }, [currentPlayer]);

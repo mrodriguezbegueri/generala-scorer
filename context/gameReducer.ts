@@ -1,6 +1,6 @@
 import { Player } from "@/interfaces";
 import { GameState } from ".";
-import { getNextPlayer } from "@/util/getNextPlayer";
+import { getNextPlayer } from "@/util";
 
 type GameActionType =
   | { type: "[Game]- Set Players"; payload: Player[] }
