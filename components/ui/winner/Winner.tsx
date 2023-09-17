@@ -14,16 +14,10 @@ interface Props {
 }
 
  const WinnerDialog:FC<Props> =  ({ winnerPlayer }) => {
-  const [open, setOpen] = useState(true)
-  const [audio, setAudio] = useState<HTMLAudioElement | string>("")
+ const [open, setOpen] = useState(true)
+  const [audio] = useState(new Audio('/winAudio.mp3'))
 
   const router = useRouter()
-
-  const play = () => {
-    if ( typeof audio !== 'string' ) {
-      audio.play();
-    }
-  };
 
   const handleClose = () => {
     router.push('/')
@@ -31,8 +25,7 @@ interface Props {
   };
 
   useEffect(() => {
-    setAudio(new Audio('/winAudio.mp3'))
-    play()
+    audio.play()
   }, [])
   
 
