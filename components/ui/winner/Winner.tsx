@@ -15,8 +15,6 @@ interface Props {
 
  const WinnerDialog:FC<Props> =  ({ winnerPlayer }) => {
   const [open, setOpen] = useState(true)
-  const [audio] = useState(new Audio('/winAudio.mp3'))
-
   const router = useRouter()
 
   const handleClose = () => {
@@ -25,6 +23,7 @@ interface Props {
   };
 
   useEffect(() => {
+    const audio = new Audio('/winAudio.mp3');
     audio.play()
   }, [])
   

@@ -21,7 +21,7 @@ const Players = () => {
   };
 
   return (
-    <div style={{ position: 'sticky',  top: "1rem", zIndex: 1 }}>
+    <div style={{ position: 'sticky',  top: "1rem", zIndex: 999 }}>
       <Grid container spacing={2} sx={{ marginBottom: "20px" }}>
         <Grid rowSpacing={2} container item xs={4}>
           <Grid item xs={12}>
