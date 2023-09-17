@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Player } from '@/interfaces';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
@@ -24,7 +24,10 @@ interface Props {
     setOpen(false);
   };
 
-  audio.play()
+  useEffect(() => {
+    audio.play()
+  }, [])
+  
 
   return (
     <div>
