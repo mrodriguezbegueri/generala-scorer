@@ -20,12 +20,13 @@ interface Props {
   const router = useRouter()
 
   const handleClose = () => {
+    audio.pause()
     router.push('/')
     setOpen(false);
   };
 
   useEffect(() => {
-    audio.play()
+    audio.autoplay = true
   }, [])
   
 
