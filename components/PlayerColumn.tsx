@@ -1,11 +1,13 @@
 "use client";
 
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { Box, FormControl, Grid, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { Item } from ".";
 import { FC, useContext, useState } from "react";
 import { GAME_VALUES } from "@/constants";
 import { Player } from "@/interfaces";
 import { GameContext } from "@/context";
+
+import styles from './playerColumn.module.css'
 
 interface Props {
   player: Player;
@@ -39,10 +41,9 @@ const PlayerColumn: FC<Props> = ({ player, players }) => {
     <Grid rowSpacing={2} container item xs={Math.max(9 / players.length)}>
       {Object.keys(GAME_VALUES).map((gameValue, index) => (
         <Grid item xs={12} key={GAME_VALUES[gameValue].label}>
-          <Item>
+          <Item className={ selectedValues[index] !== '' ? styles['score-annotated'] : '' }>
             <Box>
               <FormControl fullWidth>
-                <InputLabel id={`${GAME_VALUES[gameValue].label}-${index}`}>{GAME_VALUES[gameValue].label}</InputLabel>
                 <Select label={"hola"} value={selectedValues[index]} onChange={(event) => handleChange(event, index)}>
                   {GAME_VALUES[`${index + 1}`]?.values.map((value) => (
                     <MenuItem key={value} value={value}>
