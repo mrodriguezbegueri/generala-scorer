@@ -3,7 +3,7 @@ import { Item } from "..";
 
 export const Board = () => {
   return (
-    <Grid rowSpacing={2} container item xs={4}>
+    <Grid wrap="wrap" rowSpacing={2} container item xs={2}>
       <Grid item xs={12}>
         <Item>1</Item>
       </Grid>

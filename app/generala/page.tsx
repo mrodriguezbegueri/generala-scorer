@@ -7,7 +7,7 @@ import { getWinner, isGameOver } from "@/util"
 import { useContext, useEffect, useState } from "react"
 
 export default function Generala() {
-  const { players } = useContext(GameContext)
+  const { players, setNextPlayerToCurrentPlayer } = useContext(GameContext)
   const [thereIsAWinnger, setThereIsAWinner] = useState(false)
   const [winner, setWinner] = useState<Player | null>(null)
 
@@ -19,12 +19,12 @@ export default function Generala() {
 
       setThereIsAWinner(true)
     }
-  }, [players])
+  }, [setNextPlayerToCurrentPlayer])
   return (
-    <>
+    <div>
     {
       thereIsAWinnger ? <WinnerDialog winnerPlayer={winner} /> : <TableScore />
     }
-    </>
+    </div>
   )
 }

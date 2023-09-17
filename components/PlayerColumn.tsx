@@ -2,24 +2,19 @@
 
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { Item } from ".";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { GAME_VALUES } from "@/constants";
 import { Player } from "@/interfaces";
 import { GameContext } from "@/context";
 
 interface Props {
   player: Player;
+  players: Player[];
 }
 
-const PlayerColumn: FC<Props> = ({ player }) => {
-  const {currentPlayer, setCurrentPlayer, setNextPlayerToCurrentPlayer} = useContext(GameContext)
+const PlayerColumn: FC<Props> = ({ player, players }) => {
+  const {currentPlayer, setNextPlayerToCurrentPlayer, setCurrentPlayer} = useContext(GameContext)
   const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
-
-
-  useEffect(() => {
-    setSelectedValues(currentPlayer.values)
-  }, [currentPlayer]);
-
   const { updateTotalScore } = useContext(GameContext);
   
   const handleChange = (event: SelectChangeEvent, index: number) => {
@@ -37,12 +32,11 @@ const PlayerColumn: FC<Props> = ({ player }) => {
     player.values = newSelectedValues
     setCurrentPlayer(player)
     updateTotalScore(player, totalScore)
-
     setNextPlayerToCurrentPlayer(player)
   };
 
   return (
-    <Grid rowSpacing={2} container item xs={8}>
+    <Grid rowSpacing={2} container item xs={Math.max(9 / players.length)}>
       {Object.keys(GAME_VALUES).map((gameValue, index) => (
         <Grid item xs={12} key={GAME_VALUES[gameValue].label}>
           <Item>
@@ -65,7 +59,7 @@ const PlayerColumn: FC<Props> = ({ player }) => {
       <Grid item xs={12}>
         <Item>
           <Box>
-            <Typography> {currentPlayer.totalScore.toString()} </Typography>
+            <Typography> {player.totalScore.toString()} </Typography>
           </Box>
         </Item>
       </Grid>

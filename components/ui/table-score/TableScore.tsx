@@ -8,25 +8,27 @@ import { Board, Players } from "@/components/ui";
 import { useRouter } from "next/navigation";
 
 export default function TableScore() {
-  const { currentPlayer } = useContext(GameContext);
+  const { currentPlayer, players } = useContext(GameContext);
   const router = useRouter();
 
   useEffect(() => {
     if (currentPlayer.name == "default") {
       router.push("/");
     }
-  }, [currentPlayer])
-  
+  }, [currentPlayer]);
 
   return (
     <>
       <Players />
       <div style={{ display: "flex" }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="center">
           <Board />
-          <PlayerColumn player={currentPlayer} />
+          <Grid item xs={1}></Grid>
+          {players.map((player) => (
+            <PlayerColumn key={player.name} player={player} players={players} />
+            ))}
         </Grid>
       </div>
-    </>
+            </>
   );
 }

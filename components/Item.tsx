@@ -12,6 +12,8 @@ const Item = styled(Paper)(({ theme }) => ({
   justifyContent:"center",
   color: theme.palette.text.secondary,
   height: "100px",
+  overflowWrap: "break-word",
+  textOverflow: "ellipsis"
 }));
 
 export default Item;

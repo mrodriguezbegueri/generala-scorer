@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Player } from '@/interfaces';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
@@ -15,20 +15,13 @@ interface Props {
 
  const WinnerDialog:FC<Props> =  ({ winnerPlayer }) => {
  const [open, setOpen] = useState(true)
-  const [audio] = useState(new Audio('/winAudio.mp3'))
 
   const router = useRouter()
 
   const handleClose = () => {
-    audio.pause()
     router.push('/')
     setOpen(false);
   };
-
-  useEffect(() => {
-    audio.autoplay = true
-  }, [])
-  
 
   return (
     <div>

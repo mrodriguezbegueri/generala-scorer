@@ -22,24 +22,21 @@ const Players = () => {
 
   return (
     <div style={{ position: 'sticky',  top: "1rem", zIndex: 999 }}>
-      <Grid container spacing={2} sx={{ marginBottom: "20px" }}>
-        <Grid rowSpacing={2} container item xs={4}>
-          <Grid item xs={12}>
-            <Item sx={{ alignItems: "center" }}>
-              <PeopleAltIcon />
-            </Item>
-          </Grid>
+      <Grid container justifyContent="center" spacing={2} sx={{ marginBottom: "20px" }}>
+        <Grid item xs={2} >
+          <Item sx={{ alignItems: "center" }}>
+            <PeopleAltIcon />
+          </Item>
         </Grid>
+        <Grid item xs={1}></Grid>
         {players.map((player) => (
-          <Grid rowSpacing={2} container item xs={Math.max(8 / players.length)} key={player.name}>
-            <Grid item xs={12}>
-              <Item
-                className={isCurrentPlayer(player) ? styles.currentPlayer : ""}
-                onClick={() => handleOnClickPlayer(player)}
-              >
-                <Typography>{player.name}</Typography>
-              </Item>
-            </Grid>
+          <Grid item key={player.name} xs={Math.max(9 / players.length)} justifyContent="center">
+            <Item
+              className={isCurrentPlayer(player) ? styles.currentPlayer : ""}
+              onClick={() => handleOnClickPlayer(player)}
+            >
+              <Typography>{player.name}</Typography>
+            </Item>
           </Grid>
         ))}
       </Grid>
