@@ -8,17 +8,16 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { Player } from "@/interfaces";
 
 import styles from "./players.module.css";
+import { isCurrentPlayer } from "@/util";
 
 const Players = () => {
-  const { players, setCurrentPlayer, currentPlayer } = useContext(GameContext);
+  // const { players, setCurrentPlayer, currentPlayer } = useContext(GameContext);
+  const { players, currentPlayer } = useContext(GameContext);
+  console.log('currentPlayer', currentPlayer)
 
-  const handleOnClickPlayer = (player: Player) => {
-    setCurrentPlayer(player);
-  };
-
-  const isCurrentPlayer = (player: Player): boolean => {
-    return currentPlayer.name === player.name;
-  };
+  // const handleOnClickPlayer = (player: Player) => {
+  //   setCurrentPlayer(player);
+  // };
 
   return (
     <div style={{ position: 'sticky',  top: "1rem", zIndex: 999 }}>
@@ -32,8 +31,8 @@ const Players = () => {
         {players.map((player) => (
           <Grid item key={player.name} xs={Math.max(9 / players.length)} justifyContent="center">
             <Item
-              className={isCurrentPlayer(player) ? styles.currentPlayer : ""}
-              onClick={() => handleOnClickPlayer(player)}
+              className={isCurrentPlayer(currentPlayer, player) ? styles.currentPlayer : ""}
+              // onClick={() => handleOnClickPlayer(player)}
             >
               <Typography>{player.name}</Typography>
             </Item>

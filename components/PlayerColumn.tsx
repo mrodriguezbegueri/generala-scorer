@@ -6,20 +6,31 @@ import { FC, useContext, useState } from "react";
 import { GAME_VALUES } from "@/constants";
 import { Player } from "@/interfaces";
 import { GameContext } from "@/context";
+import { isCurrentPlayer } from "@/util";
 
 import styles from './playerColumn.module.css'
 
 interface Props {
   player: Player;
   players: Player[];
+  openDialog: () => void
 }
 
-const PlayerColumn: FC<Props> = ({ player, players }) => {
+const PlayerColumn: FC<Props> = ({ player, players, openDialog }) => {
+
   const {currentPlayer, setNextPlayerToCurrentPlayer, setCurrentPlayer} = useContext(GameContext)
   const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
   const { updateTotalScore } = useContext(GameContext);
   
   const handleChange = (event: SelectChangeEvent, index: number) => {
+
+    if (!isCurrentPlayer(currentPlayer, player)) {
+      console.log('not isCurrentPlayer')
+      openDialog()
+      return
+    }
+
+
     const newSelectedValues = [...selectedValues];
     newSelectedValues[index] = event.target.value;
     setSelectedValues(newSelectedValues);
@@ -38,13 +49,14 @@ const PlayerColumn: FC<Props> = ({ player, players }) => {
   };
 
   return (
+    <>
     <Grid rowSpacing={2} container item xs={Math.max(9 / players.length)}>
       {Object.keys(GAME_VALUES).map((gameValue, index) => (
         <Grid item xs={12} key={GAME_VALUES[gameValue].label}>
           <Item className={ selectedValues[index] !== '' ? styles['score-annotated'] : '' }>
             <Box>
               <FormControl fullWidth>
-                <Select label={"hola"} value={selectedValues[index]} onChange={(event) => handleChange(event, index)}>
+                <Select value={selectedValues[index]} onChange={(event) => handleChange(event, index)}>
                   {GAME_VALUES[`${index + 1}`]?.values.map((value) => (
                     <MenuItem key={value} value={value}>
                       {" "}
@@ -65,6 +77,7 @@ const PlayerColumn: FC<Props> = ({ player, players }) => {
         </Item>
       </Grid>
     </Grid>
+    </>
   );
 };
 
