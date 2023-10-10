@@ -9,25 +9,44 @@ import { GameContext } from "@/context";
 import { isCurrentPlayer } from "@/util";
 
 import styles from './playerColumn.module.css'
+import { AlertWrongPlayer } from "./modals";
 
 interface Props {
   player: Player;
   players: Player[];
-  openDialog: () => void
 }
 
-const PlayerColumn: FC<Props> = ({ player, players, openDialog }) => {
+let resolver: any
 
-  const {currentPlayer, setNextPlayerToCurrentPlayer, setCurrentPlayer} = useContext(GameContext)
+const PlayerColumn: FC<Props> = ({ player, players }) => {
+  
+  const [showDialog, setShowDialog] = useState(false)
+  const {currentPlayer, setNextPlayerToCurrentPlayer} = useContext(GameContext)
   const [selectedValues, setSelectedValues] = useState(currentPlayer.values);
   const { updateTotalScore } = useContext(GameContext);
-  
-  const handleChange = (event: SelectChangeEvent, index: number) => {
 
+
+  const onClose = (status: boolean) => {
+    setShowDialog(false)
+    resolver(status)
+  }
+
+  const openDialog = () => {
+    setShowDialog(true)
+    return new Promise((res, rej) => {
+      resolver = res
+    })
+  }
+  
+  const handleChange = async (event: SelectChangeEvent, index: number) => {
     if (!isCurrentPlayer(currentPlayer, player)) {
-      console.log('not isCurrentPlayer')
-      openDialog()
-      return
+      const userContinue = await openDialog()
+      
+      if (userContinue === false) {
+        return
+      }
+    } else {
+      setNextPlayerToCurrentPlayer(player)
     }
 
 
@@ -43,9 +62,7 @@ const PlayerColumn: FC<Props> = ({ player, players, openDialog }) => {
     }, 0);
     
     player.values = newSelectedValues
-    setCurrentPlayer(player)
     updateTotalScore(player, totalScore)
-    setNextPlayerToCurrentPlayer(player)
   };
 
   return (
@@ -77,6 +94,7 @@ const PlayerColumn: FC<Props> = ({ player, players, openDialog }) => {
         </Item>
       </Grid>
     </Grid>
+    { showDialog && <AlertWrongPlayer close={onClose} /> }
     </>
   );
 };

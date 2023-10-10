@@ -7,16 +7,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 interface Props {
-    open: boolean
-    close: () => void
+  close: (status: boolean) => void
 }
-
-export default function AlertDialog({ open, close }: Props) {
-    
+export default function AlertDialog({ close }: Props) {
   return (
     <div>
       <Dialog
-        open={open}
+        open={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -29,8 +26,8 @@ export default function AlertDialog({ open, close }: Props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => close()}>Continuar</Button>
-          <Button onClick={() => close()} autoFocus>
+          <Button onClick={() => close(true)}>Continuar</Button>
+          <Button onClick={() => close(false)} autoFocus>
             Salir
           </Button>
         </DialogActions>

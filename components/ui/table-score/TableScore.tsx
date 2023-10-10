@@ -10,17 +10,8 @@ import { AlertWrongPlayer } from "@/components/modals";
 
 
 export default function TableScore() {
-  const [showDialog, setShowDialog] = useState(false)
   const { currentPlayer, players } = useContext(GameContext);
   const router = useRouter();
-
-  const openDialog = (): void => {
-    setShowDialog(true);
-  };
-
-  const closeDialog = (): void => {
-    setShowDialog(false);
-  };
 
   useEffect(() => {
     if (currentPlayer.name == "default") {
@@ -36,11 +27,10 @@ export default function TableScore() {
           <Board />
           <Grid item xs={1}></Grid>
           {players.map((player) => (
-            <PlayerColumn key={player.name} player={player} players={players} openDialog={openDialog} />
+            <PlayerColumn key={player.name} player={player} players={players} />
             ))}
         </Grid>
       </div>
-      <AlertWrongPlayer open={showDialog} close={closeDialog} />
       </>
   );
 }
