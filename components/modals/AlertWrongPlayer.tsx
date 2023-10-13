@@ -26,10 +26,10 @@ export default function AlertDialog({ close }: Props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => close(true)}>Continuar</Button>
           <Button onClick={() => close(false)} autoFocus>
             Salir
           </Button>
+          <Button onClick={() => close(true)}>Continuar</Button>
         </DialogActions>
       </Dialog>
     </div>
