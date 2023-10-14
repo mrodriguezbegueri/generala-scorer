@@ -13,13 +13,20 @@ export interface Props {
   open: boolean;
   options: number[];
   playerName: string;
-  close: (index: number) => void;
+  close: (index: number, valueSelected: number | undefined) => void;
 }
 
 export default function SelectScore({ open, options, close, index, playerName }: Props) {
-  const onClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, value?: number) => {
+    let valueSelected = undefined
     event.stopPropagation();
-    close(index);
+    
+
+    if (value !== undefined) {
+        valueSelected = value
+    }
+
+    close(index, valueSelected);
   };
 
   return (
@@ -29,7 +36,7 @@ export default function SelectScore({ open, options, close, index, playerName }:
         {options.map((option) => (
           <Grid container key={option}>
             <Grid item xs={12} display={"flex"} justifyContent="center">
-              <Button fullWidth>
+              <Button fullWidth onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onClose(e, option)}>
                 <Typography variant="h5">{option}</Typography>
               </Button>
             </Grid>
