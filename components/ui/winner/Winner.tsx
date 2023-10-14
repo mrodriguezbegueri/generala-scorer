@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Player } from "@/interfaces";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -22,6 +22,16 @@ const WinnerDialog: FC<Props> = ({ winnerPlayer }) => {
     router.push("/");
     setOpen(false);
   };
+
+  useEffect(() => {
+    const winAudio = new Audio('/win2.mp3')
+    winAudio.play()
+    const utterance = new SpeechSynthesisUtterance(`El Ganador es ${winnerPlayer?.name}`);
+    window.speechSynthesis.speak(utterance);
+    return () => {
+      winAudio.pause()
+    };
+  }, []);
 
   return (
     <div>
