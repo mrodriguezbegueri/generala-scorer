@@ -3,7 +3,7 @@
 import { FC, useContext, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { Item } from ".";
-import { GAME_VALUES } from "@/constants";
+import { GAME_VALUES, parseScores } from "@/constants";
 import { Player } from "@/interfaces";
 import { GameContext } from "@/context";
 import { isCurrentPlayer } from "@/util";
@@ -78,14 +78,27 @@ const PlayerColumn: FC<Props> = ({ player, players }) => {
     setNextPlayerToCurrentPlayer(player)
   };
 
+  const getScoreStyle = (score: string) => {
+
+    if (score === '0') {
+      return styles['score-cero']
+    }
+
+    if (score !== '') {
+      return styles['score-annotated']
+    }
+
+    return ''
+  }
+
   return (
     <>
     <Grid rowSpacing={2} container item xs={Math.max(9 / players.length)}>
       {Object.keys(GAME_VALUES).map((gameValue, index) => (
         <Grid item xs={12} key={GAME_VALUES[gameValue].label}>
-          <Item onClick={() => openScoreDialog(index)} sx={{ cursor: 'pointer' }} className={ player.values[index] !== '' ? styles['score-annotated'] : '' }>
+          <Item onClick={() => openScoreDialog(index)} sx={{ cursor: 'pointer' }} className={ getScoreStyle(player.values[index]) }>
             <Box>
-            <Typography>{player.values[index] !== '' ? player.values[index] : '-'}</Typography>
+            <Typography>{player.values[index] !== '' ? parseScores(Number(player.values[index])) : '-'}</Typography>
             <SelectScore playerName={player.name} index={index} close={closeScoreDialog} open={showScoreDialog[index]} options={GAME_VALUES[index + 1].values} />
             </Box>
           </Item>

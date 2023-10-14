@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Dialog from "@mui/material/Dialog";
 import { Grid, Typography } from "@mui/material";
-import { GAME_VALUES } from "@/constants";
+import { GAME_VALUES, parseScores } from "@/constants";
 
 export interface Props {
   index: number;
@@ -37,7 +37,7 @@ export default function SelectScore({ open, options, close, index, playerName }:
           <Grid container key={option}>
             <Grid item xs={12} display={"flex"} justifyContent="center">
               <Button fullWidth onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onClose(e, option)}>
-                <Typography variant="h5">{option}</Typography>
+                <Typography variant="h5">{parseScores(option)}</Typography>
               </Button>
             </Grid>
           </Grid>

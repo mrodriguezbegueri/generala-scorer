@@ -42,10 +42,24 @@ export const GAME_VALUES: Record<string, GameValue> = {
   },
   "10": {
     label: "Generala",
-    values: [0, 50],
+    values: [0, 50, 912],
   },
   "11": {
     label: "Doble Generala",
     values: [0, 100],
   },
 };
+
+export const parseScores= (score: number): string => {
+  let resultParsed = score.toString()
+
+  if (score === 0) {
+    resultParsed = 'Tacha'
+  }
+
+  if (score === 912) {
+    resultParsed = 'Servida'
+  }
+
+  return resultParsed
+}

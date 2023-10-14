@@ -1,3 +1,7 @@
 .score-annotated {
     background-color: green;
 }
+
+.score-cero {
+    background-color: red;
+}
