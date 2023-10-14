@@ -11,9 +11,10 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   winnerPlayer: Player | null;
+  playSounds: () => void
 }
 
-const WinnerDialog: FC<Props> = ({ winnerPlayer }) => {
+const WinnerDialog: FC<Props> = ({ winnerPlayer, playSounds }) => {
   const [open, setOpen] = useState(true);
 
   const router = useRouter();
@@ -24,15 +25,9 @@ const WinnerDialog: FC<Props> = ({ winnerPlayer }) => {
   };
 
   useEffect(() => {
-    const winAudio = new Audio('/win2.mp3')
-    winAudio.play()
-    const utterance = new SpeechSynthesisUtterance(`El Ganador es ${winnerPlayer?.name}`);
-    window.speechSynthesis.speak(utterance);
-    return () => {
-      winAudio.pause()
-    };
-  }, []);
-
+    playSounds()
+  }, [])
+  
   return (
     <div>
       {winnerPlayer !== null ? (

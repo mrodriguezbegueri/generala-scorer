@@ -11,6 +11,13 @@ export default function Generala () {
   const [thereIsAWinner, setThereIsAWinner] = useState(false)
   const [winner, setWinner] = useState<Player | null>(null)
 
+  const playWinnerSounds = (): void => {
+    const winAudio = new Audio('/win2.mp3')
+    winAudio.play()
+    const utterance = new SpeechSynthesisUtterance(`El Ganador es ${winner?.name}`);
+    window.speechSynthesis.speak(utterance);
+  }
+
   useEffect(() => {
     if (isGameOver(players)) {
       setWinner(getWinner(players))
@@ -21,7 +28,7 @@ export default function Generala () {
   return (
     <div>
     {
-      thereIsAWinner ? <WinnerDialog winnerPlayer={winner} /> : <TableScore />
+      thereIsAWinner ? <WinnerDialog winnerPlayer={winner} playSounds={playWinnerSounds} /> : <TableScore />
     }
     </div>
   )
