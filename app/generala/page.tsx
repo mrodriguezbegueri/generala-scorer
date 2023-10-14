@@ -10,18 +10,18 @@ export default function Generala () {
   const { players, setNextPlayerToCurrentPlayer } = useContext(GameContext)
   const [thereIsAWinner, setThereIsAWinner] = useState(false)
   const [winner, setWinner] = useState<Player | null>(null)
-
+  
   const playWinnerSounds = (): void => {
     const winAudio = new Audio('/win2.mp3')
     winAudio.play()
     const utterance = new SpeechSynthesisUtterance(`El Ganador es ${winner?.name}`);
     window.speechSynthesis.speak(utterance);
   }
-
+  
   useEffect(() => {
+    setThereIsAWinner(false)
     if (isGameOver(players)) {
       setWinner(getWinner(players))
-
       setThereIsAWinner(true)
     }
   }, [setNextPlayerToCurrentPlayer])
