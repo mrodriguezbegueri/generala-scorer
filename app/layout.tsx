@@ -5,6 +5,8 @@ import { Box } from "@mui/material";
 import { GameProvider } from "@/context";
 import { NavBar } from "@/components/ui";
 
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 const roboto = Roboto({
   weight: "700",
   subsets: ["latin"],
@@ -30,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </Providers>
         </body>
+        <GoogleAnalytics gaId="G-QWFTKDT8Y8" />
       </GameProvider>
     </html>
   );
