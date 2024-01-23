@@ -14,8 +14,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Generala Scorer",
-  description: "Application to keep score of the Generala game",
+  title: "Generala",
+  description: "Anotador para generala",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
