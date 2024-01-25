@@ -6,6 +6,7 @@ import { GameProvider } from "@/context";
 import { NavBar } from "@/components/ui";
 
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from "next/script";
 
 const roboto = Roboto({
   weight: "700",
@@ -16,8 +17,10 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Anotador de Generala - Tu mejor opción para anotar tus partidas de Generala",
   description: "Anotador de Generala es una app diseñada para facilitar el registro de partidas de Generala. Registra tus puntajes de forma rápida y sencilla. ¡Descárgala ahora y mejora tu experiencia de juego!",
-  keywords: "Anotador, Generala, juego de dados, puntajes, registro de partidas"
-  
+  keywords: "Anotador, Generala, juego de dados, puntajes, registro de partidas",
+  other: {
+    "google-adsense-account": "ca-pub-7843971623929558",
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </Providers>
         </body>
+        {/* <Script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7843971623929558" crossOrigin="anonymous" /> */}
         <GoogleAnalytics gaId="G-QWFTKDT8Y8" />
       </GameProvider>
     </html>
