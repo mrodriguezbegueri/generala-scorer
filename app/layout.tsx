@@ -14,8 +14,10 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Generala",
-  description: "Anotador para generala",
+  title: "Anotador de Generala - Tu mejor opción para anotar tus partidas de Generala",
+  description: "Anotador de Generala es una app diseñada para facilitar el registro de partidas de Generala. Registra tus puntajes de forma rápida y sencilla. ¡Descárgala ahora y mejora tu experiencia de juego!",
+  keywords: "Anotador, Generala, juego de dados, puntajes, registro de partidas"
+  
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
