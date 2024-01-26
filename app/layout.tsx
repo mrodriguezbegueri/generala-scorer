@@ -6,7 +6,6 @@ import { GameProvider } from "@/context";
 import { NavBar } from "@/components/ui";
 
 import { GoogleAnalytics } from '@next/third-parties/google'
-import Script from "next/script";
 
 const roboto = Roboto({
   weight: "700",
@@ -37,7 +36,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </Providers>
         </body>
-        {/* <Script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7843971623929558" crossOrigin="anonymous" /> */}
         <GoogleAnalytics gaId="G-QWFTKDT8Y8" />
       </GameProvider>
     </html>
